@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从 Vibe Coding 到 Agentic Building：Harness 思维下，设计师如何定义意图、约束与验收。">
+  <title>从 Vibe Coding 到 Agentic Building</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#article">跳到正文</a>
+  <div class="paper-texture" aria-hidden="true"></div>
+  <div class="micro-dots" aria-hidden="true"></div>
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
+
+  <header class="top-strip" data-od-id="top-strip">
+    <a class="wordmark" href="#top" aria-label="返回文章顶部">HARNESS / 01</a>
+    <div class="strip-marquee" aria-hidden="true">
+      <div class="strip-track">
+        <span>意图</span><i>→</i><span>上下文</span><i>→</i><span>工具</span><i>→</i><span>环境</span><i>→</i><span>护栏</span><i>→</i><span>验证</span><i>→</i><span>记忆</span><i>→</i>
+        <span>意图</span><i>→</i><span>上下文</span><i>→</i><span>工具</span><i>→</i><span>环境</span><i>→</i><span>护栏</span><i>→</i><span>验证</span><i>→</i><span>记忆</span><i>→</i>
+      </div>
+    </div>
+    <span class="read-time">约 28 分钟</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" data-od-id="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <p class="kicker" data-od-id="hero-kicker">设计 × Coding Agent × Harness</p>
+      <h1 data-od-id="hero-title">从 Vibe Coding<br>到 <em>Agentic Building</em></h1>
+      <p class="hero-subtitle" data-od-id="hero-subtitle">Harness 思维下，设计师如何定义意图、约束与验收</p>
+      <div class="hero-intro">
+        <p>当实现成本不断降低，设计师真正不可替代的部分，不是写更多代码，而是对用户、场景、边界和质量作出判断。</p>
+      </div>
+      <div class="hero-orbit" aria-hidden="true"><span>INTENT</span><span>CONTEXT</span><span>VERIFY</span></div>
+      <div class="hero-meta"><span>长篇专题</span><span>2026</span><span>产品设计 / Agent 工程</span></div>
+    </section>
+
+    <div class="article-shell">
+      <button class="toc-toggle" id="toc-toggle" type="button" aria-controls="article-toc" aria-expanded="true" data-od-id="chapter-navigation-toggle">
+        <span class="toc-toggle-label">隐藏目录</span>
+        <span class="toc-toggle-icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+      <aside class="toc" id="article-toc" aria-label="文章目录" aria-hidden="false" data-open="true" data-od-id="chapter-navigation">
+        <p>章节</p>
+        <nav>
+          <a href="#preface" class="is-active">导言</a>
+          <a href="#vibe">0. Vibe Coding</a>
+          <a href="#harness">1. Harness</a>
+          <a href="#role">2. 新角色</a>
+          <a href="#dimensions">3. 七个维度</a>
+          <a href="#workflow">4. 工作流</a>
+          <a href="#case">5. Case</a>
+          <a href="#multi-agent">6. 多 Agent</a>
+          <a href="#boundary">7. 协作边界</a>
+          <a href="#template">8. 委托模板</a>
+          <a href="#checklist">9. 自检清单</a>
+          <a href="#conclusion">结语</a>
+        </nav>
+      </aside>
+
+      <article id="article" class="article" data-od-id="article-body">
+        <section id="preface" class="chapter chapter-lead" data-od-id="chapter-preface">
+          <p class="chapter-no">INTRODUCTION</p>
+          <p>过去，设计师用 AI 写代码时，最常见的动作是把 Figma 链接交给模型，再补上一句：“请 1:1 还原为 React 代码。”</p>
+          <p>AI 通常能在几分钟内生成一个看起来不错的页面。但当这份代码进入真实项目，问题就会逐渐出现：数据是写死的，状态没有覆盖，组件边界混乱，接口接入后页面崩溃，改一个局部却影响了其他区域。它看起来像产品，却更接近一个只能演示的静态样品。</p>
+          <p>这类问题曾被归结为“设计师缺少工程化思维”。这个判断仍然成立，但已经不够完整。</p>
+          <p>随着 Coding Agent 开始进入真实代码库，自主读取项目、修改文件、运行测试、操作浏览器并持续数小时完成任务，软件生产的基本单位正在发生变化。我们不再只是要求 AI“生成一段代码”，而是在把一个结果委托给它。</p>
+          <div class="question-shift" data-od-id="question-shift">
+            <div><span>过去的问题</span><p>怎样写出一个更好的 Prompt，让 AI 生成更规范的组件？</p></div>
+            <i aria-hidden="true">→</i>
+            <div><span>真正重要的问题</span><p>怎样建立一套 Harness，让 Agent 能理解产品意图、在正确边界内执行、验证自己的结果，并在失败后继续迭代？</p></div>
+          </div>
+          <p>这意味着设计师的角色也在变化。设计师交付的不再只是一张界面，也不只是一组前端代码，而是一套机器可以理解、执行和验证的产品意图。</p>
+        </section>
+
+        <section id="vibe" class="chapter" data-od-id="chapter-vibe-coding">
+          <header class="chapter-heading"><span>00</span><h2>Vibe Coding 没有消失，<em>只是升级了</em></h2></header>
+          <p>Vibe Coding 的价值是降低实现门槛。自然语言让设计师第一次可以绕过大量语法学习，直接把想法变成可运行的软件。</p>
+          <p>但 Vibe Coding 容易把注意力集中在“生成的一瞬间”：页面是不是好看、组件是不是还原、代码是不是能运行。真实的软件生产关心的却是一段更长的过程：</p>
+          <ul class="line-list">
+            <li>需求变化后能否继续修改；</li><li>接入真实数据后能否稳定运行；</li><li>异常状态是否被正确处理；</li><li>Agent 是否理解项目已有的技术和设计约束；</li><li>修改后有没有破坏其他功能；</li><li>结果是否经过真实交互验证；</li><li>失败经验能否沉淀下来，避免下一次重复犯错。</li>
+          </ul>
+          <p>因此，Vibe Coding 与 Agentic Building 的区别，不是“代码由谁写”，而是人和 AI 之间的协作单位发生了变化。</p>
+          <div class="comparison" role="table" aria-label="Vibe Coding 与 Agentic Building 对比" data-od-id="vibe-agentic-comparison">
+            <div class="comparison-head" role="row"><span role="columnheader">维度</span><span role="columnheader">Vibe Coding</span><span role="columnheader">Agentic Building</span></div>
+            <div role="row"><b role="rowheader">工作单位</b><span role="cell">页面、组件、代码片段</span><strong role="cell">可验证的产品结果</strong></div>
+            <div role="row"><b role="rowheader">主要输入</b><span role="cell">一段 Prompt、一个设计链接</span><strong role="cell">产品意图、项目上下文、约束与验收标准</strong></div>
+            <div role="row"><b role="rowheader">AI 的职责</b><span role="cell">生成代码</span><strong role="cell">规划、实现、运行、检查和迭代</strong></div>
+            <div role="row"><b role="rowheader">判断方式</b><span role="cell">看起来对不对</span><strong role="cell">是否通过约定的验证</strong></div>
+            <div role="row"><b role="rowheader">失败处理</b><span role="cell">人重新描述、重新生成</span><strong role="cell">Agent 诊断、修复并再次验证</strong></div>
+            <div role="row"><b role="rowheader">人的角色</b><span role="cell">提供指令、修正细节</span><strong role="cell">定义意图、边界和“什么叫做好”</strong></div>
+          </div>
+          <p>OpenAI 将这种变化概括为：人类负责设计环境、表达意图和建立反馈循环，Agent 负责执行。Anthropic 在长时间软件开发实验中也采用了规划者、生成者和评估者的协作结构，让 Agent 在实现前先约定“什么叫完成”，实现后再操作真实应用进行验证。</p>
+          <p class="editorial-line">这就是 Harness 思维的起点。</p>
+        </section>
+
+        <section id="harness" class="chapter chapter-wide" data-od-id="chapter-harness">
+          <header class="chapter-heading"><span>01</span><h2>Harness 不是一个更长的 <em>System Prompt</em></h2></header>
+          <p>Harness 可以理解为围绕 Agent 建立的一整套工作环境。它不是某一段神奇的提示词，而是决定 Agent 能看到什么、能做什么、如何判断结果、失败后如何继续的一组机制。</p>
+          <p class="formula-line">Harness = 意图 + 上下文 + 工具 + 环境 + 护栏 + 验证 + 记忆</p>
+          <div class="harness-model" data-od-id="harness-equation" aria-label="Harness 由意图、上下文、工具、环境、护栏、验证和记忆组成">
+            <div class="model-core"><small>EXECUTION ENVIRONMENT</small><b>HARNESS</b><span>可执行、可验证、可恢复</span></div>
+            <div class="model-items">
+              <div><b>意图</b><span>为什么做</span></div><div><b>上下文</b><span>从哪里开始</span></div><div><b>工具</b><span>能做什么</span></div><div><b>环境</b><span>在哪里做</span></div><div><b>护栏</b><span>什么不能做</span></div><div><b>验证</b><span>何时算完成</span></div><div><b>记忆</b><span>如何变得更好</span></div>
+            </div>
+          </div>
+          <div class="definition-grid">
+            <article data-od-id="definition-intent"><span>01</span><h3>意图</h3><p>回答“为什么做、为谁做、最终要改善什么”。它避免 Agent 只完成字面任务，却偏离真正的用户价值。</p></article>
+            <article data-od-id="definition-context"><span>02</span><h3>上下文</h3><p>包括代码库、设计系统、历史决策、业务术语、已有组件和接口规范。Agent 不应该每次都从一个空白世界开始工作。</p></article>
+            <article data-od-id="definition-tools"><span>03</span><h3>工具</h3><p>决定 Agent 能否读取 Figma、修改代码、运行测试、启动浏览器、查询数据或检查日志。没有工具的 AI 只能给建议，有工具的 Agent 才能完成真实任务。</p></article>
+            <article data-od-id="definition-environment"><span>04</span><h3>环境</h3><p>是 Agent 实际执行工作的地方，包括代码仓库、依赖、测试数据、预览地址和权限。环境越接近真实项目，验证结果越有意义。</p></article>
+            <article data-od-id="definition-guardrails"><span>05</span><h3>护栏</h3><p>明确什么不能做，例如不能修改支付逻辑、不能删除生产数据、不能绕过权限检查、不能自行发布上线。</p></article>
+            <article data-od-id="definition-verification"><span>06</span><h3>验证</h3><p>定义“什么叫完成”。可以是类型检查、单元测试、浏览器操作、视觉对比、无障碍检查，也可以是设计师对交互质量的判断。</p></article>
+            <article data-od-id="definition-memory"><span>07</span><h3>记忆</h3><p>把项目经验和失败案例沉淀为可复用资产：项目说明、Skills、测试或持续更新的 Gotchas 清单。</p></article>
+          </div>
+          <p>真正有效的 Harness 不会试图一次告诉 Agent 所有知识。它会让 Agent 在需要时读取相关内容，并通过执行结果不断获得反馈。</p>
+        </section>
+
+        <section id="role" class="chapter" data-od-id="chapter-designer-role">
+          <header class="chapter-heading"><span>02</span><h2>设计师的新角色：<em>产品意图架构师</em></h2></header>
+          <p>当 Agent 能够承担越来越多实现工作，设计师的价值不会缩小，而会从“描述界面”向“定义产品意图”移动。</p>
+          <div class="role-stack">
+            <article><span>01</span><h3>定义要实现的用户结果</h3><p>不只描述页面上有什么，还要说明用户为什么来到这里、希望完成什么、成功后系统如何回应，以及失败时如何继续。</p></article>
+            <article><span>02</span><h3>定义什么叫体验正确</h3><p>“和 Figma 一致”只是其中一项。还包括状态是否完整、反馈是否及时、键盘是否可操作、内容加载时是否跳动、错误是否能恢复。</p></article>
+            <article><span>03</span><h3>定义不能突破的边界</h3><p>提交期间不能重复操作，无权限用户不能看到敏感内容，局部加载失败不能让整个页面白屏，未保存内容不能静默丢失。</p></article>
+          </div>
+          <p>这并不意味着设计师要取代研发。系统架构、安全、数据一致性、生产可靠性和最终代码审查仍然需要工程角色负责。</p>
+          <blockquote class="compact-quote">设计师定义产品意图和体验验收，Agent 承担大量实现与验证，研发负责系统边界和生产治理。</blockquote>
+        </section>
+
+        <section id="dimensions" class="chapter chapter-wide" data-od-id="chapter-seven-dimensions">
+          <header class="chapter-heading"><span>03</span><h2>Harness 思维的 <em>七个设计维度</em></h2></header>
+          <div class="dimension-list">
+            <article data-od-id="dimension-executable-intent"><div class="dimension-index">3.1</div><div><h3>从功能描述升级为可执行意图</h3><p>“做一个任务列表”不是完整意图，因为 Agent 不知道任务列表服务于什么目标，也不知道哪些取舍最重要。</p><p>一个可执行意图至少需要说明：目标用户是谁；用户在什么情境下使用；最重要的任务是什么；哪些结果代表成功；哪些内容不在本次范围；发生冲突时，什么优先。</p><blockquote class="example">为每天需要处理大量审批的负责人设计一个任务中心。首要目标是帮助用户迅速识别高风险和即将超时的任务，而不是展示尽可能多的信息。移动端以快速处理为主，复杂配置不在本次范围内。</blockquote><p>这段描述给 Agent 的不是页面结构，而是决策依据。当布局、性能和信息密度发生冲突时，它知道应该优先保障什么。</p></div></article>
+            <article data-od-id="dimension-state-system"><div class="dimension-index">3.2</div><div><h3>用户体验是一套状态系统</h3><p>用户经历的不是一张静态截图，而是在不同状态之间穿行的过程。一个列表页面至少可能包含：</p><div class="state-cloud"><span>初次加载</span><span>正常内容</span><span>空数据</span><span>请求失败</span><span>部分数据失败</span><span>刷新中</span><span>数据过期</span><span>无权限</span><span>离线</span><span>提交中</span><span>提交成功</span><span>失败并回滚</span></div><p>设计师不必先写代码，但需要把这些状态及其转换关系说清楚。例如，用户提交审批后，页面可以先进行乐观更新；如果请求失败，则恢复原状态并保留用户输入。重复点击必须被阻止，但用户仍然需要知道操作正在进行。</p><p>在 Harness 中，状态不是一句补充说明，而是实现和验证共同使用的契约。生成 Agent 按它实现，评估 Agent 按它穷举检查。</p></div></article>
+            <article data-od-id="dimension-data-structure"><div class="dimension-index">3.3</div><div><h3>数据结构就是产品逻辑</h3><p>界面中的每一个元素背后都有数据。用户名对应文本字段，头像对应图片地址，任务状态对应枚举，是否允许操作对应权限字段。设计师如果不定义这些信息，Agent 就会根据画面自行猜测。</p><p>真正危险的不是字段名称不够优雅，而是数据结构允许产品进入矛盾状态。例如用多个布尔值描述“草稿、审核中、通过、拒绝”，就可能同时出现“正在审核”和“已经拒绝”。</p><div class="code-block" data-code><div class="code-head"><span>approval-status.ts</span><button type="button" data-copy-code>复制</button></div><pre><code>type ApprovalStatus =
+  | "draft"
+  | "pending"
+  | "approved"
+  | "rejected"
+  | "expired"</code></pre></div><p>进一步还可以让不同状态携带不同信息：</p><div class="code-block" data-code><div class="code-head"><span>approval-state.ts</span><button type="button" data-copy-code>复制</button></div><pre><code>type ApprovalState =
+  | { status: "draft"; lastSavedAt?: string }
+  | { status: "pending"; submittedAt: string }
+  | { status: "approved"; approvedAt: string; approverName: string }
+  | { status: "rejected"; rejectedAt: string; reason: string }
+  | { status: "expired"; expiredAt: string }</code></pre></div><p>这份结构不仅驱动 UI，也可以成为设计、前端、后端和测试共同使用的产品契约。</p></div></article>
+            <article data-od-id="dimension-component-boundary"><div class="dimension-index">3.4</div><div><h3>组件边界要服务于独立修改和独立验证</h3><p>过去常用复用性或文件行数判断是否拆组件。它们可以作为信号，但不应该成为固定规则。</p><ul class="line-list"><li>这部分能否独立描述职责；</li><li>能否单独提供输入并看到结果；</li><li>能否独立验证；</li><li>修改它时，影响范围是否清晰；</li><li>它是否依赖不必要的全局状态；</li><li>它的变化频率是否与周围内容明显不同。</li></ul><p>好的组件边界不仅方便研发维护，也方便 Agent 工作。任务越能被限定在清晰的边界内，Agent 越不容易在修改局部时破坏整个系统。</p><p>因此，“单文件不超过 150 行”更适合作为提醒，而不是不可突破的法律。组件是否容易理解、修改和验证，比绝对行数更重要。</p></div></article>
+            <article data-od-id="dimension-work-units"><div class="dimension-index">3.5</div><div><h3>把复杂需求拆成可验收的工作单元</h3><p>Agent 可以完成长任务，但长任务不等于模糊任务。与其让 Agent“一次完成整个产品”，更稳妥的方式是把工作拆成一组能够独立验证的结果：</p><ol class="number-steps"><li>建立任务数据结构和模拟数据；</li><li>实现四种列表状态；</li><li>实现筛选和排序；</li><li>实现任务详情；</li><li>实现提交与失败回滚；</li><li>完成键盘操作和无障碍检查；</li><li>在移动端和桌面端验证关键路径。</li></ol><p>拆分的重点不是让人提前决定所有技术细节，而是确保每一步都有明确产物，能够检查，也能够在失败后单独重做。</p></div></article>
+            <article data-od-id="dimension-acceptance"><div class="dimension-index">3.6</div><div><h3>验收标准必须能够被执行</h3><p>过去设计交付中的验收往往是“符合设计稿”“交互自然”“性能流畅”。这些表达对人有启发，但无法让 Agent 稳定判断自己是否完成。</p><ul class="check-lines"><li>首次进入时显示与最终内容等高的骨架屏；</li><li>接口返回空数组时显示空状态和“创建任务”按钮；</li><li>请求失败时保留页面框架，并提供重试入口；</li><li>提交期间按钮不可重复点击；</li><li>请求失败后恢复提交前状态；</li><li>使用键盘可以进入任务卡片并触发主要操作；</li><li>任务标题超长时不挤压状态标签；</li><li>在指定视口下不存在横向滚动；</li><li>浏览器控制台没有错误；</li><li>类型检查和项目测试通过。</li></ul><p>验收标准不应该只由生成 Agent 读取。它还需要交给独立的评估过程，通过浏览器、测试工具或人工评审验证。</p></div></article>
+            <article data-od-id="dimension-failure-memory"><div class="dimension-index">3.7</div><div><h3>为失败、恢复和经验积累设计</h3><p>传统 Vibe Coding 的失败循环通常是：发现问题，再对 AI 说一遍。</p><div class="feedback-loop" aria-label="执行、观察、诊断、修复、重新验证和记录经验的循环"><span>执行</span><i>→</i><span>观察</span><i>→</i><span>诊断</span><i>→</i><span>修复</span><i>→</i><span>重新验证</span><i>→</i><span>记录经验</span></div><p>如果 Agent 经常忘记使用项目的语义色，解决方法不只是当场提醒，而是把它写入项目 Skill，并增加检查规则。如果 Agent 经常只验证页面是否打开，却没有实际完成用户任务，就应该把“必须操作完整关键路径”加入评估标准。</p><p>如果某种动画会导致低性能设备掉帧，就应该把这个案例记录为项目 Gotcha，并为相关组件建立性能基线。</p><p class="editorial-line">最有价值的 Harness 不是从一开始就写得非常复杂，而是在一次次真实失败中逐渐形成的。</p></div></article>
+          </div>
+        </section>
+
+        <section id="workflow" class="chapter chapter-wide" data-od-id="chapter-workflow">
+          <header class="chapter-heading"><span>04</span><h2>一条完整的 <em>Agentic Building</em> 工作流</h2></header>
+          <p>一个面向真实项目的工作流，可以分为九个阶段。</p>
+          <div class="workflow-track" data-od-id="nine-stage-workflow">
+            <article><span>01</span><h3>写一页产品意图</h3><p>先说明用户、场景、目标、优先级与非目标。不要从组件列表开始，也不要急着规定具体技术实现。</p></article>
+            <article><span>02</span><h3>让 Agent 阅读项目现场</h3><p>先了解现有代码、设计系统、技术栈、组件库、数据来源和测试方式。项目已有的规则优先于临时 Prompt。</p></article>
+            <article><span>03</span><h3>建立设计契约</h3><p>包括状态、数据结构、交互规则、响应式行为、无障碍要求和失败策略。它是设计稿与代码之间的语义层。</p></article>
+            <article><span>04</span><h3>定义验收契约</h3><p>在开始实现之前，先约定“什么叫完成”。覆盖正常路径、异常路径和关键边界。</p></article>
+            <article><span>05</span><h3>规划任务</h3><p>简单修改由一个 Agent 完成；涉及多个页面、数据和复杂交互的任务，先拆成可验证的工作单元。</p></article>
+            <article><span>06</span><h3>实现并自检</h3><p>执行 Agent 修改代码、运行项目、完成基础检查，并报告实际改了什么、验证了什么、还有哪些风险。</p></article>
+            <article><span>07</span><h3>独立评估</h3><p>评估者不只阅读代码，而是像用户一样操作产品，检查关键路径、异常状态、视觉质量、控制台错误和数据变化。主观设计质量进一步拆成视觉层级、组件一致性、布局合理性、模板化 AI 风格和交互反馈。</p></article>
+            <article><span>08</span><h3>迭代到通过</h3><p>评估者给出具体证据，执行 Agent 修复并重新验证，直到满足阈值或遇到必须由人决策的问题。</p></article>
+            <article><span>09</span><h3>由人完成关键决策</h3><p>涉及产品取舍、品牌表达、安全权限、生产数据、依赖变化和上线发布时，需要明确的人类确认。</p></article>
+          </div>
+          <p class="editorial-line">自动化越强，确认边界越需要清晰。</p>
+        </section>
+
+        <section id="case" class="chapter chapter-wide case-section" data-od-id="chapter-case-study">
+          <header class="chapter-heading"><span>05</span><h2>Case：让 Agent 交付一个真正可用的 <em>审批任务中心</em></h2></header>
+          <p>假设产品要增加一个审批任务中心。用户需要查看待处理事项、识别即将超时的任务，并快速完成同意或拒绝操作。</p>
+          <p>传统方式可能是给 AI 一张 Figma 页面，让它生成列表和卡片。Harness 方式则会准备一组相互配合的项目资产：</p>
+          <div class="code-block tree-code" data-code><div class="code-head"><span>项目资产</span><button type="button" data-copy-code>复制</button></div><pre><code>product-brief.md
+design-contract.md
+state-model.ts
+acceptance-criteria.md
+AGENTS.md
+skills/
+  approval-task-center/
+    SKILL.md
+    references/
+      domain-rules.md
+      gotchas.md
+tests/
+  approval-task-center.spec.ts</code></pre></div>
+
+          <div class="case-grid">
+            <article data-od-id="case-product-intent"><span>5.1</span><h3>产品意图</h3><div class="contract-card"><b>目标用户</b><p>每天需要处理十条以上审批任务的负责人。</p><b>核心目标</b><p>帮助用户优先发现高风险和即将超时的任务，并以最短路径完成处理。</p><b>优先级</b><p>正确性 &gt; 可恢复性 &gt; 操作效率 &gt; 视觉动效。</p><b>非目标</b><p>本次不提供审批流程配置和管理员能力。</p></div></article>
+            <article data-od-id="case-state-contract"><span>5.2</span><h3>状态契约</h3><div class="code-block" data-code><div class="code-head"><span>task-center-state.ts</span><button type="button" data-copy-code>复制</button></div><pre><code>type TaskCenterState =
+  | { status: "loading" }
+  | { status: "loaded"; tasks: ApprovalTask[];
+      isRefreshing: boolean }
+  | { status: "empty" }
+  | { status: "error"; message: string;
+      canRetry: boolean }
+  | { status: "offline";
+      cachedTasks: ApprovalTask[] }</code></pre></div></article>
+            <article data-od-id="case-action-state"><span>5.2B</span><h3>任务处理状态</h3><div class="code-block" data-code><div class="code-head"><span>task-action-state.ts</span><button type="button" data-copy-code>复制</button></div><pre><code>type TaskActionState =
+  | { status: "idle" }
+  | { status: "submitting";
+      action: "approve" | "reject" }
+  | { status: "success";
+      action: "approve" | "reject" }
+  | { status: "error";
+      action: "approve" | "reject";
+      message: string }</code></pre></div><p>页面加载状态和单项操作状态不会互相污染。一条任务提交失败，不应该让整个任务中心进入错误页。</p></article>
+            <article data-od-id="case-experience-contract"><span>5.3</span><h3>体验契约</h3><p>任务按风险和截止时间排序。即将超时的任务需要有清晰但不过度惊扰的提示。</p><p>用户点击同意后，界面可以立即反馈，但提交期间必须阻止重复操作。如果提交失败，任务恢复到原位置，并显示可重试提示。</p><p>拒绝操作必须填写原因。关闭拒绝弹窗后，未提交内容需要保留，除非用户主动放弃。</p><p>网络中断时，如果存在缓存数据，页面继续展示缓存内容，并明确提示数据可能不是最新状态。</p></article>
+            <article data-od-id="case-acceptance-contract"><span>5.4</span><h3>验收契约</h3><ul class="check-lines"><li>加载、正常、空、失败和离线五种页面状态均可独立访问；</li><li>单条任务失败不会影响其他任务；</li><li>提交期间无法重复点击；</li><li>失败后任务状态与排序恢复；</li><li>拒绝原因为空时不能提交；</li><li>键盘可以完成任务选择和主要操作；</li><li>在移动端主要操作不被遮挡；</li><li>列表中不存在重复任务 ID；</li><li>类型检查、自动测试和关键浏览器流程通过；</li><li>控制台无未处理错误。</li></ul></article>
+            <article data-od-id="case-agent-roles"><span>5.5</span><h3>Agent 分工</h3><dl class="agent-roles"><div><dt>规划者</dt><dd>检查需求和项目，提出实现范围、文件变化与验证方案。</dd></div><div><dt>执行者</dt><dd>按照设计契约实现功能，并运行类型检查和已有测试。</dd></div><div><dt>评估者</dt><dd>启动应用，操作加载、审批、拒绝、断网和失败回滚等路径，对照验收契约记录证据。</dd></div></dl><p>如果评估不通过，执行者只修复失败项，再交给评估者复验。</p></article>
+          </div>
+          <p>设计师不需要逐行指导 Agent 写什么代码。设计师最重要的工作，是确保产品意图、状态、失败体验与验收标准没有缺口。</p>
+        </section>
+
+        <section id="multi-agent" class="chapter" data-od-id="chapter-multi-agent">
+          <header class="chapter-heading"><span>06</span><h2>什么时候需要 <em>多 Agent</em></h2></header>
+          <p>多 Agent 不是默认答案。协调本身也有成本，模型能力提升后，一些曾经必要的复杂脚手架可能很快变得多余。</p>
+          <div class="agent-split">
+            <article><span>SINGLE AGENT</span><h3>适合单 Agent</h3><ul><li>修改一个已有组件</li><li>修复明确且可复现的界面问题</li><li>补充一个状态</li><li>按已有模式完成小范围重构</li></ul></article>
+            <article><span>INDEPENDENT ROLES</span><h3>适合引入规划或评估角色</h3><ul><li>涉及多个页面和数据流</li><li>需要持续较长时间</li><li>同时包含设计、前端、后端和测试</li><li>失败代价较高</li><li>主观体验质量很重要</li><li>实现者容易产生完成偏差</li></ul></article>
+          </div>
+          <p>复杂度应该由任务风险决定，而不是为了展示 Agent 能力而增加。</p>
+          <p>Harness 中的每一条规则，也都隐含着对模型能力的判断。随着模型进步，这些判断需要定期重新检查。今天必要的限制，明天可能成为效率障碍。</p>
+        </section>
+
+        <section id="boundary" class="chapter" data-od-id="chapter-collaboration-boundary">
+          <header class="chapter-heading"><span>07</span><h2>人、Agent 与研发的 <em>新协作边界</em></h2></header>
+          <div class="role-matrix" role="table" aria-label="角色责任">
+            <div role="row"><b role="rowheader">产品</b><span role="cell">明确业务目标、优先级和范围</span></div>
+            <div role="row"><b role="rowheader">设计师</b><span role="cell">定义用户意图、状态、交互、视觉原则和体验验收</span></div>
+            <div role="row"><b role="rowheader">Agent</b><span role="cell">分析、实现、运行、验证、修复和记录</span></div>
+            <div role="row"><b role="rowheader">研发</b><span role="cell">定义系统边界，负责架构、安全、数据一致性、生产可靠性与最终审查</span></div>
+            <div role="row"><b role="rowheader">测试 / 评估</b><span role="cell">从用户路径和系统行为验证结果，提供可复现证据</span></div>
+          </div>
+          <p>设计师不需要证明自己能独立写出所有生产代码。真正重要的是让设计决策不再只存在于画面和口头沟通中，而是变成 Agent 与研发都能读取的产品契约。</p>
+          <p>研发也不再只是接收设计师生成的代码，而是帮助建立一个可靠的执行环境：提供项目规则、测试能力、权限边界和上线机制。</p>
+          <p class="editorial-line">最好的结果不是“设计师替代研发”，而是让设计意图进入软件生产链路时损耗更少。</p>
+        </section>
+
+        <section id="template" class="chapter chapter-wide" data-od-id="chapter-delegation-template">
+          <header class="chapter-heading"><span>08</span><h2>可复用的 <em>任务委托模板</em></h2></header>
+          <p>以后向 Agent 发起任务时，可以使用下面这套结构，而不是不断增加零散规则。</p>
+          <div class="code-block prompt-template" data-code data-od-id="delegation-template"><div class="code-head"><span>agent-task-brief.txt</span><button type="button" data-copy-code>复制模板</button></div><pre><code>【目标】
+为谁解决什么问题？最终希望改善什么结果？
+
+【项目上下文】
+目标代码库、技术栈、已有组件、设计系统和相关文档是什么？
+开始前需要读取哪些项目文件？
+
+【范围】
+本次必须完成什么？哪些内容明确不做？
+
+【产品契约】
+有哪些状态、数据字段、交互规则和响应式行为？
+失败时如何处理？
+
+【优先级】
+发生冲突时，正确性、可维护性、韧性、性能和视觉细节如何排序？
+
+【验收标准】
+什么行为可以被测试或观察？
+需要覆盖哪些正常路径、异常路径和边界情况？
+
+【验证方式】
+需要运行哪些检查？
+是否需要启动应用并使用浏览器完成关键路径？
+是否需要视觉、无障碍或性能检查？
+
+【安全边界】
+哪些文件、数据、权限和外部系统不能修改？
+哪些动作必须等待人工确认？
+
+【交付内容】
+需要提交哪些代码、测试、文档、截图或验证记录？</code></pre></div>
+          <p>这份模板的价值不在于让 Prompt 变得更长，而是让任务从“描述想要什么”，升级为“建立可执行和可验证的合同”。</p>
+        </section>
+
+        <section id="checklist" class="chapter" data-od-id="chapter-checklist">
+          <header class="chapter-heading"><span>09</span><h2>设计师的 <em>Harness 自检清单</em></h2></header>
+          <p>在把任务交给 Agent 前，可以检查。勾选状态会保存在当前浏览器中。</p>
+          <div class="interactive-checklist" data-od-id="harness-checklist">
+            <label><input type="checkbox"><span>是否说明了目标用户和核心任务；</span></label>
+            <label><input type="checkbox"><span>是否明确了成功结果与非目标；</span></label>
+            <label><input type="checkbox"><span>Agent 是否能读取真实项目上下文；</span></label>
+            <label><input type="checkbox"><span>是否定义了关键状态和转换关系；</span></label>
+            <label><input type="checkbox"><span>是否明确了数据字段、枚举和缺失值策略；</span></label>
+            <label><input type="checkbox"><span>是否覆盖了加载、空、错误、离线和权限状态；</span></label>
+            <label><input type="checkbox"><span>是否说明了不可突破的安全与产品边界；</span></label>
+            <label><input type="checkbox"><span>验收标准是否可以被观察或执行；</span></label>
+            <label><input type="checkbox"><span>是否要求 Agent 实际运行并操作结果；</span></label>
+            <label><input type="checkbox"><span>是否区分了自动检查与人工判断；</span></label>
+            <label><input type="checkbox"><span>失败后是否有修复和重新验证机制；</span></label>
+            <label><input type="checkbox"><span>新发现的错误是否会沉淀为测试、规则或 Gotcha；</span></label>
+            <label><input type="checkbox"><span>当前 Harness 是否仍然必要，还是已经因模型进步而过度复杂。</span></label>
+          </div>
+          <div class="checklist-meter"><span id="checklist-count">0 / 13</span><div><i id="checklist-bar"></i></div><button id="checklist-reset" type="button">重置</button></div>
+        </section>
+
+        <section id="conclusion" class="chapter conclusion" data-od-id="chapter-conclusion">
+          <p class="chapter-no">CONCLUSION</p>
+          <h2>设计师交付的是<br><em>可运行的意图</em></h2>
+          <p>Vibe Coding 让设计师第一次可以直接生成软件。Agentic Building 则进一步要求我们思考：当实现成本不断降低，什么才是人真正不可替代的部分？</p>
+          <p>答案不是写更多代码，也不是写更复杂的 Prompt，而是对用户、场景、边界和质量作出判断。</p>
+          <p>页面长什么样，只是设计意图的一部分。它为什么存在、有哪些状态、什么不能发生、失败后如何恢复、怎样证明它已经做好，同样属于设计。</p>
+          <p>未来最有价值的设计交付物，不再只是一份 Figma 文件，也不只是一段生成代码，而是一个可以被机器执行、被工具验证、被团队持续维护的产品意图系统。</p>
+          <blockquote>当这套系统具备上下文、工具、环境、护栏、验证和记忆时，它就不再是一次 Vibe Coding。<strong>它成为了一个 Harness。</strong></blockquote>
+        </section>
+
+        <section class="references" data-od-id="references">
+          <h2>参考资料</h2>
+          <ol>
+            <li><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noreferrer">OpenAI：Harness engineering — leveraging Codex in an agent-first world <span>↗</span></a></li>
+            <li><a href="https://www.anthropic.com/engineering/harness-design-long-running-apps" target="_blank" rel="noreferrer">Anthropic：Harness design for long-running application development <span>↗</span></a></li>
+            <li><a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noreferrer">Anthropic：Scaling Managed Agents <span>↗</span></a></li>
+            <li><a href="https://www.figma.com/blog/the-figma-canvas-is-now-open-to-agents/" target="_blank" rel="noreferrer">Figma：Agents, meet the Figma canvas <span>↗</span></a></li>
+            <li><a href="https://www.figma.com/blog/the-figma-agent-is-here/" target="_blank" rel="noreferrer">Figma：The Figma Design Agent is here <span>↗</span></a></li>
+            <li><a href="https://openai.com/index/how-agents-are-transforming-work/" target="_blank" rel="noreferrer">OpenAI：How agents are transforming work <span>↗</span></a></li>
+          </ol>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer data-od-id="footer"><span>HARNESS / DESIGN INTENT SYSTEM</span><a href="#top">返回顶部 ↑</a><span>Editorial web prototype · 2026</span></footer>
+  <script src="script.js"></script>
+</body>
+</html>
